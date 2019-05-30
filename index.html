@@ -2,49 +2,154 @@
 <html lang="en">
 
 <head>
-     <meta charset="utf-8">
-     <meta name="description" content="Palacio Pizzaria e Churrascaria">
-     <meta name="keywords" content="HTML,CSS,JavaScript">
-     <meta name="author" content="RKS WEB DESIGN">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" type="text/css" href="main.css" />        
-        <title> Teste </title>
-    
+    <meta charset="utf-8">
+    <meta name="description" content="Palacio Pizzaria e Churrascaria">
+    <meta name="keywords" content="HTML,CSS,JavaScript">
+    <meta name="author" content="RKS WEB DESIGN">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+    <title> Teste </title>
+
 </head>
 
 <body>
-        <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
-            <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
-            <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
-            <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
-            <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                
-            </div>
-        </div>
-        
-        <script>
 
-        </script>
-    </body>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <div class="subnav">
+            <button class="subnavbtn">Cardápio</button>
+            <div class="subnav-content">
+                <a href="#company">Massa</a>
+                <a href="#team">Pizza Salgada</a>
+                <a href="#careers"> Pizza Doce</a>
+            </div>
+        </div>
+        <div class="subnav">
+            <button class="subnavbtn">Eventos </button>
+            <div class="subnav-content">
+                <a href="#bring">Aniversário</a>
+                <a href="#deliver">Festa Empresarial</a>
+                <a href="#package">Comemoração Datas Especiais</a>
+                <a href="#express"> Colocar evento</a>
+            </div>
+        </div>
+        <div class="subnav">
+            <button class="subnavbtn">Partners <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+                <a href="#link1">Link 1</a>
+                <a href="#link2">Link 2</a>
+                <a href="#link3">Link 3</a>
+                <a href="#link4">Link 4</a>
+            </div>
+        </div>
+        <a href="#contact">Contact</a>
+
+
+        <br><br><br><br>
+
+        <figure>
+            <span class="trs next"></span>
+            <span class="trs prev"></span>
+
+            <div id="slider">
+                <a href="#" class="trs"><img src="salada2.jpg" width="550px" height="650px" /></a>
+                <a href="#" class="trs"><img src="salada3.jpg" width="550px" height="350px" /></a>
+                <a href="#" class="trs"><img src="churrasco.JPG" width="550px" height="350px" /></a>
+                <a href="#" class="trs"><img src="pratos.jpg" width="550px" height="350px" /></a>
+                <a href="#" class="trs"><img src="pista.jpg" width="550px" height="350px" /></a>
+            </div>
+
+            <figcaption></figcaption>
+        </figure>
+
+
+    </div>
+    <script type="text/javascript">
+        // código navBar slide // 
+        function setaImagem() {
+            var settings = {
+                primeiraImg: function() {
+                    elemento = document.querySelector("#slider a:first-child");
+                    elemento.classList.add("ativo");
+                    this.legenda(elemento);
+                },
+
+                slide: function() {
+                    elemento = document.querySelector(".ativo");
+
+                    if (elemento.nextElementSibling) {
+                        elemento.nextElementSibling.classList.add("ativo");
+                        settings.legenda(elemento.nextElementSibling);
+                        elemento.classList.remove("ativo");
+                    } else {
+                        elemento.classList.remove("ativo");
+                        settings.primeiraImg();
+                    }
+
+                },
+
+                proximo: function() {
+                    clearInterval(intervalo);
+                    elemento = document.querySelector(".ativo");
+
+                    if (elemento.nextElementSibling) {
+                        elemento.nextElementSibling.classList.add("ativo");
+                        settings.legenda(elemento.nextElementSibling);
+                        elemento.classList.remove("ativo");
+                    } else {
+                        elemento.classList.remove("ativo");
+                        settings.primeiraImg();
+                    }
+                    intervalo = setInterval(settings.slide, 4000);
+                },
+
+                anterior: function() {
+                    clearInterval(intervalo);
+                    elemento = document.querySelector(".ativo");
+
+                    if (elemento.previousElementSibling) {
+                        elemento.previousElementSibling.classList.add("ativo");
+                        settings.legenda(elemento.previousElementSibling);
+                        elemento.classList.remove("ativo");
+                    } else {
+                        elemento.classList.remove("ativo");
+                        elemento = document.querySelector("a:last-child");
+                        elemento.classList.add("ativo");
+                        this.legenda(elemento);
+                    }
+                    intervalo = setInterval(settings.slide, 4000);
+                },
+
+                legenda: function(obj) {
+                    var legenda = obj.querySelector("img").getAttribute("alt");
+                    document.querySelector("figcaption").innerHTML = legenda;
+                }
+
+            }
+
+            //chama o slide
+            settings.primeiraImg();
+
+            //chama a legenda
+            settings.legenda(elemento);
+
+            //chama o slide à um determinado tempo
+            var intervalo = setInterval(settings.slide, 4000);
+            document.querySelector(".next").addEventListener("click", settings.proximo, false);
+            document.querySelector(".prev").addEventListener("click", settings.anterior, false);
+        }
+
+        window.addEventListener("load", setaImagem, false);
+
+    </script>
+</body>
 
 </html>
